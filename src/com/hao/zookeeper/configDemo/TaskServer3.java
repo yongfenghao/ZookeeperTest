@@ -1,4 +1,4 @@
-package com.pzoom.zookeeper.configDemo;
+package com.hao.zookeeper.configDemo;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -8,7 +8,7 @@ import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;
 
-public class TaskServer2 {
+public class TaskServer3 {
 	private static final String ACCOUNTSERVER_HOST = "/sem.accountserver.host";
 	ZooKeeper zk;
 	Watcher wh = new Watcher() {
@@ -26,7 +26,7 @@ public class TaskServer2 {
 	};
 
 	public static void main(String args[]) throws Exception {
-		TaskServer2 server1 = new TaskServer2();
+		TaskServer3 server1 = new TaskServer3();
 		server1.testWatch();
 		server1.startSocketServer();
 	}
@@ -38,7 +38,7 @@ public class TaskServer2 {
 
 	private ZooKeeper initZookeeper() throws IOException {
 		if (null == zk) {
-			zk = new ZooKeeper("127.0.0.1:2182", 300000, null);
+			zk = new ZooKeeper("127.0.0.1:2183", 300000, null);
 		}
 		return zk;
 	}
@@ -48,7 +48,7 @@ public class TaskServer2 {
 		try {
 			ServerSocket server = null;
 			try {
-				server = new ServerSocket(4702);
+				server = new ServerSocket(4703);
 			} catch (Exception e) {
 				System.out.println("can not listen to:" + e);
 			}

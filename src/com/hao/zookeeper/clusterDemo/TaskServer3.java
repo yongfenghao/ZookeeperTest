@@ -1,4 +1,4 @@
-package com.pzoom.zookeeper.clusterDemo;
+package com.hao.zookeeper.clusterDemo;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -10,10 +10,9 @@ import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooDefs.Ids;
 import org.apache.zookeeper.ZooKeeper;
 
-public class TaskServer1 {
+public class TaskServer3 {
 	private static final String ACCOUNTSERVER_HOST = "/AllTaskServer";
 	ZooKeeper zk;
-
 	Watcher wh = new Watcher() {
 		public void process(org.apache.zookeeper.WatchedEvent event) {
 			try {
@@ -30,21 +29,21 @@ public class TaskServer1 {
 	};
 
 	public static void main(String args[]) throws Exception {
-		TaskServer1 server1 = new TaskServer1();
+		TaskServer3 server1 = new TaskServer3();
 		server1.startUp();
 		server1.startSocketServer();
 	}
 
 	private void startUp() throws Exception {
-		System.out.println("I'm Server1");
+		System.out.println("I'm Server3");
 		initZookeeper();
 		zk.getChildren(ACCOUNTSERVER_HOST, wh);
-		zk.create(ACCOUNTSERVER_HOST.concat("/10.100.30.125"), "10.100.30.125".getBytes(), Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
+		zk.create(ACCOUNTSERVER_HOST.concat("/10.100.30.127"), "10.100.30.127".getBytes(), Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
 	}
 
 	private ZooKeeper initZookeeper() throws IOException {
 		if (null == zk) {
-			zk = new ZooKeeper("127.0.0.1:2181", 5000, wh);
+			zk = new ZooKeeper("127.0.0.1:2183", 5000, wh);
 		}
 		return zk;
 	}
@@ -53,7 +52,7 @@ public class TaskServer1 {
 		try {
 			ServerSocket server = null;
 			try {
-				server = new ServerSocket(4701);
+				server = new ServerSocket(4703);
 			} catch (Exception e) {
 				System.out.println("can not listen to:" + e);
 			}
